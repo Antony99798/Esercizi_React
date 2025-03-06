@@ -1,1 +1,1 @@
-# Esercizi_React
+In questa repository ci saranno tutti gli esercizi di React
