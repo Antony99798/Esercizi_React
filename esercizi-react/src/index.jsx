@@ -1,4 +1,4 @@
-import App from "./App"
+import Welcome from "./App"
 import {createRoot} from "react-dom/client"
 
-createRoot(document.getElementById("root")).render(<App/>)
+createRoot(document.getElementById("root")).render(<Welcome/>)
