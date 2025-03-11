@@ -1,11 +1,11 @@
-import Hello from "./Hello";
-import Messaggio from "./Messaggio";
+
+import Welcome from "./Welcome";
 
 export default function App(){
     return(
         <div>
-            <Hello/>
-            <Messaggio/>
+        <Welcome name = "Antonio"
+        age = {25}/>
         </div>
     )
 }
