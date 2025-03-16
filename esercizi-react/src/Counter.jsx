@@ -1,19 +1,20 @@
-import { useState } from "react";
-import CounterDisplay from "./CounterDisplay";
+import { useState, useEffect } from "react";
 
-export default function Counter({initialvalue = 0, incrementAmount = 1}) {
-  const [counter, setCounter] = useState(initialvalue);
+export default function Counter ({ initialCount = 0, increment = 1 }){
+  const [counter, setCounter] = useState(initialCount);
+
+  useEffect(() => {
+    console.log("Il contatore è:", counter);
+  }, [counter]);
 
   return (
     <div>
-      <CounterDisplay count={counter} />
-      <button onClick={() => setCounter((prev) => prev + incrementAmount)}>
-        Incrementa
-      </button>
-      <button onClick={() => setCounter((prev) => prev - incrementAmount)}>
-        Decrementa
-      </button>
-      <button onClick={() => setCounter(initialvalue)}>Reset</button>
+      <h2>Counter: {counter}</h2>
+      <button onClick={() => setCounter(counter + increment)}>Increment</button>
     </div>
   );
-}
+};
+
+
+
+
