@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function Counter ({ initialCount = 0, increment = 1 }){
-  const [counter, setCounter] = useState(initialCount);
+export default function Counter ({ initialValue = 0, increment = 1 }){
+  const [counter, setCounter] = useState(initialValue);
 
   useEffect(() => {
     console.log("Il contatore è:", counter);
