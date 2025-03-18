@@ -1,5 +1,5 @@
 import {createRoot} from "react-dom/client"
-import App from "./Chats";
-import Chat from "./Chats";
+import UncontrolledLogin from "./UncontrolledLogin";
 
-createRoot(document.getElementById("root")).render(<Chat/>);
+
+createRoot(document.getElementById("root")).render(<UncontrolledLogin/>);
