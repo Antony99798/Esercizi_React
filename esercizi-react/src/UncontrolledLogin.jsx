@@ -24,15 +24,15 @@ export default function UncontrolledLogin() {
           password: formData.get("password"),
           remember: formData.get("remember") === 'on' ? true: false,
         };
+         console.log(data);
     }
 
     return (
-      <form onSubmit={onLogin}>
+      <form onSubmit={loginWithFormData}>
         <input name="username" />
         <input name="password" type="password" />
         <input name="remember" type="checkbox"/>
-        <button onClick={onLogin}>Login</button>
-        <button onClick={loginWithFormData}>Submit</button>
+        <button type="submit">Login</button>
       </form>
     );
 }
