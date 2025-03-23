@@ -1,5 +1,6 @@
 import {createRoot} from "react-dom/client"
-import App from "./FocusableInput";
+import Colori from "./Color";
 
 
-createRoot(document.getElementById("root")).render(<App/>);
+
+createRoot(document.getElementById("root")).render(<Colori/>);
