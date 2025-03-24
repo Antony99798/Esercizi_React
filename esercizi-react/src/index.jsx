@@ -1,6 +1,7 @@
 import {createRoot} from "react-dom/client"
-import TodoList from "./App";
+import Container from "./Container";
 
 
 
-createRoot(document.getElementById("root")).render(<TodoList/>);
+
+createRoot(document.getElementById("root")).render(<Container/>);
