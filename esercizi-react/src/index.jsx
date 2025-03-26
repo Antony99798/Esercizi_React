@@ -4,4 +4,8 @@ import Container from "./Container";
 
 
 
-createRoot(document.getElementById("root")).render(<Container/>);
+createRoot(document.getElementById("root")).render(
+  <Container title="Cliccami">
+    <p>Contenuto visibile quando aperto</p>
+  </Container>
+);
