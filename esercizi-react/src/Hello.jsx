@@ -1,6 +1,9 @@
-import { createContext } from "react";
+import { createContext, useContext} from "react";
 
-const LanguageContext = createContext("it");
+const LanguageContext = createContext({
+  language: "it",
+  setLanguage: () => {},
+});
 
 const Hello = () => {
   const { language } = useContext(LanguageContext);
