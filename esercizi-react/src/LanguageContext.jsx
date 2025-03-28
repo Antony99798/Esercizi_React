@@ -21,3 +21,4 @@ const messages = {
   es: "¡Hola, Mundo!",
   fr: "Bonjour, Monde!",
 };
+ export default LanguageProvider;
