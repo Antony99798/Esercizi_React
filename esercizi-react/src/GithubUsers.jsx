@@ -1,3 +1,6 @@
+import { useState } from "react";
+import GithubUser from "./Githubuser";
+
 const GithubUsers = ()=>{
   const [username, setUsername] = useState("");
   const [users, setUsers] = useState([]);
@@ -17,7 +20,7 @@ return (
       Get User info
     </button>
     {users.map((user)=>(
-      <GithubUsers username = {user}/>
+      <GithubUser username = {user}/>
     ))}
   </div>
 )

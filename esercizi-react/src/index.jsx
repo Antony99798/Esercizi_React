@@ -1,11 +1,5 @@
 import {createRoot} from "react-dom/client"
-import Container from "./Container";
+import App from "./App";
 
 
-
-
-createRoot(document.getElementById("root")).render(
-  <Container title="Cliccami">
-    <p>Contenuto visibile quando aperto</p>
-  </Container>
-);
+createRoot(document.getElementById("root")).render(<App/>);

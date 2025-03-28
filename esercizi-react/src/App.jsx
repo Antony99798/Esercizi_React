@@ -2,8 +2,9 @@ import GithubUsers from "./GithubUsers"
 
 const App = ()=> {
     return (
-        <div className="">
+        <div>
         <GithubUsers/>
         </div>
     )
 }
+export default App;
