@@ -1,24 +1,22 @@
+import { useContext } from "react";
+import Hello, {LanguageContext} from "./Hello";
+
 const App = () => {
   const { language, setLanguage } = useContext(LanguageContext);
-
+ const handleLanguageChange = (event) =>{
+    setLanguage(event.target.value)
+ }
   return (
     <div>
-      <select value={language} onChange={(e) => setLanguage(e.target.value)}>
-        <option value="en">English</option>
-        <option value="it">Italiano</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-      </select>
-      <Hello />
+      <LanguageContext.Provider value={language}>
+        <select name="language"
+        value={language} onChange={handleLanguageChange}>
+          <option value="en">English</option>
+          <option value="it">Italiano</option>
+        </select>
+        <Hello />
+      </LanguageContext.Provider>
     </div>
   );
 };
 
-// Rendering dell'app all'interno del provider
-const Root = () => (
-  <LanguageProvider>
-    <App />
-  </LanguageProvider>
-);
-
-export default Root;
