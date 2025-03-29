@@ -1,83 +1,56 @@
-import { useState, useEffect } from "react";
+import React from "react";
+import useCounter from "./UseCounter";
+import useCurrentLocation from "./UseCurrentLocation";
+import useForm from "./UseForm";
+import useGithubUser from "./UseGithubUser";
 
-// Hook useCounter
-export function useCounter(initialValue = 0) {
-  const [count, setCount] = useState(initialValue);
+const App = () => {
+  const { counter, onIncrement, onDecrement, onReset } = useCounter();
+  const {
+    currentLocation,
+    onGetCurrentLocation,
+    error: locationError,
+  } = useCurrentLocation();
+  const [formData, handleInputChange] = useForm({ username: "" });
+  const { user, onGetUser, loading, error } = useGithubUser();
 
-  const increment = () => setCount((prev) => prev + 1);
-  const decrement = () => setCount((prev) => prev - 1);
-  const reset = () => setCount(initialValue);
+  return (
+    <div>
+      {/* Contatore */}
+      <h2>Counter: {counter}</h2>
+      <button onClick={onIncrement}>+</button>
+      <button onClick={onDecrement}>-</button>
+      <button onClick={onReset}>Reset</button>
 
-  return { count, increment, decrement, reset };
-}
+      {/* Posizione */}
+      <h2>Location:</h2>
+      <button onClick={onGetCurrentLocation}>Get Location</button>
+      {currentLocation && (
+        <p>
+          Lat: {currentLocation.latitude}, Lng: {currentLocation.longitude}
+        </p>
+      )}
+      {locationError && <p style={{ color: "red" }}>{locationError.message}</p>}
 
-// Hook useForm
-export function useForm(initialValues = { username: "", password: "" }) {
-  const [values, setValues] = useState(initialValues);
+      {/* Form */}
+      <h2>GitHub User Search:</h2>
+      <input
+        type="text"
+        name="username"
+        value={formData.username}
+        onChange={handleInputChange}
+      />
+      <button onClick={() => onGetUser(formData.username)}>Search</button>
+      {loading && <p>Loading...</p>}
+      {error && <p style={{ color: "red" }}>{error.message}</p>}
+      {user && (
+        <div>
+          <h3>{user.login}</h3>
+          <img src={user.avatar_url} alt={user.login} width={50} />
+        </div>
+      )}
+    </div>
+  );
+};
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues((prev) => ({ ...prev, [name]: value }));
-  };
-
-  return { values, handleChange };
-}
-
-// Hook useGithubUser
-export function useGithubUser(username) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchUser = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(`https://api.github.com/users/${username}`);
-      if (!response.ok) throw new Error("User not found");
-      const data = await response.json();
-      setUser(data);
-    } catch (err) {
-      setError(err.message);
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (username) fetchUser();
-  }, [username]);
-
-  return { user, loading, error, fetchUser };
-}
-
-// Hook useCurrentLocation
-export function useCurrentLocation() {
-  const [location, setLocation] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      setError("Geolocation is not supported by this browser.");
-      return;
-    }
-    setLoading(true);
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-        setLoading(false);
-      },
-      (err) => {
-        setError(err.message);
-        setLoading(false);
-      }
-    );
-  };
-
-  return { location, loading, error, getLocation };
-}
+export default App;
