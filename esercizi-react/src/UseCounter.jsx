@@ -1,22 +1,12 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
-const UseCounter = (initialValue = 0) => {
-    const [counter, setCounter] = useState(initialValue);
+function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
 
-    const handleCounterIncrement = () => {
-        setCounter((value)=> value +1);
-    }
-    const handleCounterDecrement = () => {
-        setCounter((value)=> value -1);
-    }
-    const handleCounterReset = () => {
-        setCounter(initialValue);
-    }
-    return {
-        counter: counter,
-        onIncrement: handleCounterIncrement,
-        onDecrement: handleCounterDecrement,
-        onReset: handleCounterReset,
-    }
+  const increment = useCallback(() => setCount((prev) => prev + 1), []);
+  const decrement = useCallback(() => setCount((prev) => prev - 1), []);
+  const reset = useCallback(() => setCount(initialValue), [initialValue]);
+
+  return { count, increment, decrement, reset };
 }
-export default UseCounter;
+export default useCounter

@@ -1,54 +1,25 @@
 import React from "react";
+import FilteredList from "./FilteredList";
 import useCounter from "./UseCounter";
-import useCurrentLocation from "./UseCurrentLocation";
-import useForm from "./UseForm";
-import useGithubUser from "./UseGithubUser";
 
 const App = () => {
-  const { counter, onIncrement, onDecrement, onReset } = useCounter();
-  const {
-    currentLocation,
-    onGetCurrentLocation,
-    error: locationError,
-  } = useCurrentLocation();
-  const [formData, handleInputChange] = useForm({ username: "" });
-  const { user, onGetUser, loading, error } = useGithubUser();
+  const { count, increment, decrement, reset } = useCounter();
+
+  const items = [
+    { id: 1, name: "Alice", age: 22 },
+    { id: 2, name: "Bob", age: 17 },
+    { id: 3, name: "Charlie", age: 25 },
+  ];
 
   return (
     <div>
-      {/* Contatore */}
-      <h2>Counter: {counter}</h2>
-      <button onClick={onIncrement}>+</button>
-      <button onClick={onDecrement}>-</button>
-      <button onClick={onReset}>Reset</button>
+      <h1>Counter: {count}</h1>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+      <button onClick={reset}>Reset</button>
 
-      {/* Posizione */}
-      <h2>Location:</h2>
-      <button onClick={onGetCurrentLocation}>Get Location</button>
-      {currentLocation && (
-        <p>
-          Lat: {currentLocation.latitude}, Lng: {currentLocation.longitude}
-        </p>
-      )}
-      {locationError && <p style={{ color: "red" }}>{locationError.message}</p>}
-
-      {/* Form */}
-      <h2>GitHub User Search:</h2>
-      <input
-        type="text"
-        name="username"
-        value={formData.username}
-        onChange={handleInputChange}
-      />
-      <button onClick={() => onGetUser(formData.username)}>Search</button>
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error.message}</p>}
-      {user && (
-        <div>
-          <h3>{user.login}</h3>
-          <img src={user.avatar_url} alt={user.login} width={50} />
-        </div>
-      )}
+      <h2>Filtered List</h2>
+      <FilteredList items={items} />
     </div>
   );
 };
