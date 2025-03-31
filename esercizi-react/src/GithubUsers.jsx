@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GithubUser from "./Githubuser";
 
 const GithubUsers = ()=>{
@@ -13,6 +13,14 @@ const handleFetch = async()=>{
 const data = await response.json()
 setUsers((users)=>[...users, data])
 }
+
+useEffect(()=> {
+  fetch(`https://api.github.com/users/${username}`)
+  .then(response => response.json())
+  .then (json=> setUsers((users)=>[...users, json])
+  )
+},[username])
+
 return (
   <div>
     <input type="text" value={username} onChange={handleUsername}/>
