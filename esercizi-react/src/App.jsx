@@ -1,14 +1,16 @@
-import { SWRConfig } from "swr";
-import MyComponent from "./MyComponent";
-
-function App() {
+import GithubUserProfile from "./GithubUserProfile"
+import { SWRConfig } from "swr"
+const fetcher = (url) => fetch(url).then((response) => response.json());
+//Il fetcher è una funzione che prende un URL e restituisce i dati convertiti in JSON.
+// Questa funzione verrà utilizzata da SWR per recuperare i dati in modo asincrono.
+const App = ()=> {
   return (
-    <SWRConfig
-      value={{ fetcher: (url) => fetch(url).then((res) => res.json()) }}
-    >
-      <MyComponent />
-    </SWRConfig>
+    <div>
+      <SWRConfig value={{fetcher}}>
+        <GithubUserProfile username={"octocat"} />
+      </SWRConfig>
+    </div>
   );
+  //Il componente App avvolge l'applicazione con SWRConfig, passando la funzione fetcher come valore globale per tutte le chiamate API gestite con SWR.
+ //Il componente GithubUserProfile viene renderizzato con il valore username={"octocat"}, quindi probabilmente andrà a recuperare i dati del profilo GitHub dell'utente "octocat".
 }
-
-export default App;
