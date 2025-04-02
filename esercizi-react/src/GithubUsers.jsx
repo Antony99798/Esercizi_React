@@ -1,37 +1,16 @@
-import { useEffect, useState } from "react";
-import GithubUser from "./Githubuser";
+import useSWR from "swr"
 
-const GithubUsers = ()=>{
-  const [username, setUsername] = useState("");
-  const [users, setUsers] = useState([]);
-
-const handleUsername=(event)=>{
-  setUsername(event.target.value)
+const fetcher = url => fetch(url).then(response=>response.json())
+export function GithubUsers(){
+    const {data,error} = useSWR(`https://api.github.com/users`,fetcher)
+    return
+    <div>
+        {!data && !error && <h3>Loading...</h3>}
+        {error && <h3>An error has occurred</h3>}
+        {data && !error && <ul>
+        {data.map(user=>(
+            <li key = {user.login}>{user.login}</li>
+        ))}
+        </ul>}
+    </div>
 }
-const handleFetch = async()=>{
-  const response = await fetch(`https://api.github.com/users/${username}`);
-const data = await response.json()
-setUsers((users)=>[...users, data])
-}
-
-useEffect(()=> {
-  fetch(`https://api.github.com/users/${username}`)
-  .then(response => response.json())
-  .then (json=> setUsers((users)=>[...users, json])
-  )
-},[username])
-
-return (
-  <div>
-    <input type="text" value={username} onChange={handleUsername}/>
-    <button type="button" onClick={handleFetch}>
-      Get User info
-    </button>
-    {users.map((user)=>(
-      <GithubUser username = {user}/>
-    ))}
-  </div>
-)
-}
-
-export default GithubUsers
