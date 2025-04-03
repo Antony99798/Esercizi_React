@@ -1,16 +1,24 @@
-import GithubUserProfile from "./GithubUserProfile"
-import { SWRConfig } from "swr"
-const fetcher = (url) => fetch(url).then((response) => response.json());
-//Il fetcher è una funzione che prende un URL e restituisce i dati convertiti in JSON.
-// Questa funzione verrà utilizzata da SWR per recuperare i dati in modo asincrono.
+import {BrowserRouter, Routes, Route, Link, Navigate} from "react-router-dom"
+import { Dashboard } from "./Dashboard";
+import { Profilo } from "./Profilo";
+import { Impostazioni } from "./impostazioni";
 const App = ()=> {
   return (
-    <div>
-      <SWRConfig value={{fetcher}}>
-        <GithubUserProfile username={"octocat"} />
-      </SWRConfig>
-    </div>
+    <>
+      <BrowserRouter>
+        <div>
+          <Link to="/Dashboard">Dashboard</Link>
+          
+        </div>
+        <Routes>
+          <Route path = "/redirect" element= {<Navigate to="/Dashboard"/>}/>
+          <Route path="/Dashboard" element={<Dashboard />}>
+          <Route path="/Profilo" element={<Profilo />} />
+          <Route path="/Impostazioni" element={<Impostazioni />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
-  //Il componente App avvolge l'applicazione con SWRConfig, passando la funzione fetcher come valore globale per tutte le chiamate API gestite con SWR.
- //Il componente GithubUserProfile viene renderizzato con il valore username={"octocat"}, quindi probabilmente andrà a recuperare i dati del profilo GitHub dell'utente "octocat".
 }
+export default App;
