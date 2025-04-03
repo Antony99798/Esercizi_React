@@ -1,3 +1,3 @@
-export function Impostazioni(){
+export default function Impostazioni(){
     return
 }

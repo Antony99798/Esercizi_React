@@ -1,8 +1,8 @@
 import useSWR from "swr"
 
 const fetcher = (url) => fetch(url).then(response => response.json())
-export function Profilo(){
-const { data, error, load } = useSWR("https://api.github.com/users/giacomo", fetcher);
+export default function Profilo(){
+const { data, error, load} = useSWR("https://api.github.com/users/giacomo", fetcher);
    if (error){
     return <p>Errore nel caricamento</p>
    }
