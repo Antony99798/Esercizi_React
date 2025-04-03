@@ -4,7 +4,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 //Questa funzione si occupa di recuperare i dati da una URL usando fetch,
 //Quando la richiesta viene completata, converte la risposta JSON.
 
-export function useGithubUser(username) {
+export function UseGithubUser(username) {
   const { data, error, mutate } = useSWR(
     username ? `https://api.github.com/users/${username}` : null,
     fetcher
@@ -22,7 +22,7 @@ export function useGithubUser(username) {
     user: data,
     error,
     loading: !data && !error,
-    onRefresh: () => mutate(null),
+    onRefresh: () => mutate(),
   };
 }
 

@@ -1,7 +1,7 @@
-import { useGithubUser } from "./UseGithubUser";
+import { UseGithubUser, } from "./UseGithubUser";
 
 const GithubUserProfile = ({ username }) => {
-  const { user, error, loading, onRefresh } = useGithubUser(username);
+  const { user, error, loading, onRefresh } = UseGithubUser(username);
   //Qui chiama useGithubUser(username) e destruttura i valori ritornati:
   //user: i dati dell'utente GitHub.
 
