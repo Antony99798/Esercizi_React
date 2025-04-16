@@ -1,4 +1,4 @@
-export default function TaskItem({ task, completato, rimuovi }){
+export default function TaskItem({ task, onToggle, onRemove }) {
   return (
     <li className="flex items-center justify-between p-2 border rounded">
       <span
@@ -8,13 +8,12 @@ export default function TaskItem({ task, completato, rimuovi }){
       >
         {task.titolo}
       </span>
-      <button onClick={() => completato(task.id)} className="text-green-500 mx-2">
+      <button onClick={() => onToggle(task.id)} className="text-green-500 mx-2">
         ✓
       </button>
-      <button onClick={() => rimuovi(task.id)} className="text-red-500">
+      <button onClick={() => onRemove(task.id)} className="text-red-500">
         🗑
       </button>
     </li>
   );
-};
-
+}

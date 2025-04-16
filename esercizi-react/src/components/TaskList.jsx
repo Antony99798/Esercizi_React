@@ -1,7 +1,7 @@
 import React from "react";
 import TaskItem from "./TaskItem";
 
-export default function TaskList({ tasks, completato, rimuovi }){
+export default function TaskList({ tasks, onToggle, onRemove }) {
   if (tasks.length === 0) {
     return <p className="text-gray-500">Nessun task presente</p>;
   }
@@ -12,10 +12,10 @@ export default function TaskList({ tasks, completato, rimuovi }){
         <TaskItem
           key={task.id}
           task={task}
-          onToggle={completato}
-          onRemove={rimuovi}
+          onToggle={onToggle}
+          onRemove={onRemove}
         />
       ))}
     </ul>
   );
-};
+}
