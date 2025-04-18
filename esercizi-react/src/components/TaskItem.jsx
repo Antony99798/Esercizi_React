@@ -15,10 +15,10 @@ export default function TaskItem({ task, onToggle, onRemove }) {
         {task.titolo}
       </span>
       <button onClick={() => onToggle(task.id)} className="text-green-500 mx-2">
-        ✓
+        ✓Completato
       </button>
       <button onClick={() => onRemove(task.id)} className="text-red-500">
-        🗑
+        🗑Rimuovi
       </button>
     </li>
   );
